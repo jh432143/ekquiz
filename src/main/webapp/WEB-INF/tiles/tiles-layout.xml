@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="empty" template="/WEB-INF/views/layout/empty_template.jsp">
+        <put-attribute name="body" value="/WEB-INF/views/layout/default/body.jsp" />
+    </definition>
+
+    <definition name="loginPage" extends="empty">
+        <put-attribute name="body" value="/WEB-INF/views/loginPage.jsp" />
+    </definition>
+
+    <definition name="main/quizBoard" extends="empty">
+        <put-attribute name="body" value="/WEB-INF/views/main/quizBoard.jsp" />
+    </definition>
+
+    <definition name="test/addUserPage" extends="empty">
+        <put-attribute name="body" value="/WEB-INF/views/test/addUserPage.jsp" />
+    </definition>
+
+    <definition name="test/board" extends="empty">
+        <put-attribute name="body" value="/WEB-INF/views/test/board.jsp" />
+    </definition>
+
+    <definition name="error/*" extends="empty">
+        <put-attribute name="body" value="/WEB-INF/views/error/{1}.jsp" />
+    </definition>
+</tiles-definitions>

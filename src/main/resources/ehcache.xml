@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://www.ehcache.org/ehcache.xsd"
+         maxBytesLocalHeap="300M"
+         updateCheck="false">
+    <diskStore path="java.io.tmpdir"/>
+
+    <defaultCache
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            overflowToDisk="false"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="600"
+            memoryStoreEvictionPolicy="LRU"
+    />
+
+    <cache name="dbTest"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="600"
+           overflowToDisk="false"
+           diskPersistent="false"
+           memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="getQuizList"
+           eternal="false"
+           timeToIdleSeconds="600"
+           timeToLiveSeconds="1800"
+           overflowToDisk="false"
+           diskPersistent="false"
+           memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="getShintList"
+           eternal="false"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="1800"
+           overflowToDisk="false"
+           diskPersistent="false"
+           memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="getAnswer"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="600"
+           overflowToDisk="false"
+           diskPersistent="false"
+           memoryStoreEvictionPolicy="LRU" />
+</ehcache>

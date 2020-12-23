@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.play.ekquiz.mapper.TestMapper">
+    <insert id="setAddUserByOnlyEmail" parameterType="TestVO" useGeneratedKeys="true" keyProperty="user_key">
+        insert into user
+            (email
+            ,password
+            ,user_auth
+            ,lock_yn
+            ,login_fail_count
+            ,join_path
+            ,reg_date
+            ,upd_date
+            )
+        values
+            (#{email}
+            ,#{password}
+            ,'2'
+            ,'N'
+            ,0
+            ,'L'
+            ,now()
+            ,now()
+            )
+    </insert>
+
+    <insert id="setUserInfo" parameterType="TestVO">
+        insert into user_info
+            (user_key
+            ,user_point
+            ,hit_count
+            ,cash_prize_sum
+            ,shint_use_count
+            ,visit_count
+            ,reg_date
+            ,upd_date)
+        values
+            (#{user_key}
+            ,0
+            ,0
+            ,0
+            ,0
+            ,0
+            ,now()
+            ,now())
+    </insert>
+
+    <insert id="setAddUserByEmailAndPhone" parameterType="TestVO">
+        insert into user
+            (email
+            ,password
+            ,phone_number
+            ,user_auth
+            ,lock_yn
+            ,login_fail_count
+            ,join_path
+            ,reg_date
+            ,upd_date
+            )
+        values
+            (#{email}
+            ,#{password}
+            ,#{phone_number}
+            ,'2'
+            ,'N'
+            ,0
+            ,'L'
+            ,now()
+            ,now()
+            )
+    </insert>
+
+    <select id="getTestQuizList" parameterType="String" resultType="TestQuizVO">
+        select quiz_key
+        ,      answer_check_yn
+        ,      cash_prize
+        from   quiz
+        where  submit_date = #{currentDate}
+    </select>
+
+    <select id="getTestHintList" parameterType="Integer" resultType="TestHintVO">
+      select hint_key, hint from hint where quiz_key = #{quiz_key} order by hint_sequence asc
+    </select>
+
+    <select id="getTestShintList" parameterType="Integer" resultType="TestShintVO">
+      select shint_key, shint from shint where quiz_key = #{quiz_key}
+    </select>
+
+    <select id="getAnswer" parameterType="Integer" resultType="TestQuizVO">
+        select answer, answer_check_yn from quiz where quiz_key = #{quiz_key}
+    </select>
+
+    <select id="getUser" parameterType="hashmap" resultType="UserVO">
+        select user_key, email, user_auth from user where email = #{email} and password = #{password}
+    </select>
+
+    <select id="getUserByEmail" parameterType="UserVO" resultType="UserVO">
+        select user_key, email, lock_yn, login_fail_count from user where email = #{email}
+    </select>
+
+    <select id="getUserByEmailAndPassword" parameterType="UserVO" resultType="UserVO">
+        select user_key, email, lock_yn, login_fail_count from user where email = #{email} and password = #{password}
+    </select>
+
+    <update id="setLoginFailCount" parameterType="UserVO">
+        update user
+        set    login_fail_count = login_fail_count + 1
+        where  email = #{email}
+    </update>
+
+    <update id="setLoginFailCountZero" parameterType="UserVO">
+        update user
+        set    login_fail_count = 0
+        where  email = #{email}
+    </update>
+
+    <update id="setLastAccessDate" parameterType="UserVO">
+        update user
+        set    last_access_date = now()
+        where  email = #{email}
+    </update>
+
+
+</mapper>
